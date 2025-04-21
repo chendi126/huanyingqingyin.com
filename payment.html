@@ -114,7 +114,8 @@
         </div>
         <div class="qr-code">
             <h2>请扫码支付</h2>
-            <img src="https://via.placeholder.com/300" alt="收款码">
+            <img src="http://nichilemeng.cn/wp-content/uploads/2025/03/即-1.jpg" alt="收款码">
+            <button class="pay-btn" id="paid-btn" style="margin-top: 20px;">我已支付</button>
         </div>
     </div>
     <footer>
@@ -142,41 +143,131 @@
             }, 2000);
         });
     
-        function generateOrderExcel(name, phone, address) {
-            // 创建工作簿
-            const wb = XLSX.utils.book_new();
+        // 添加已支付按钮事件
+        document.getElementById('paid-btn').addEventListener('click', function() {
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
             
-            // 创建数据
-            const data = [
+            if(!name || !phone || !address) {
+                alert('请填写完整的收货信息');
+                return;
+            }
+            
+            generateOrderExcel(name, phone, address);
+        });
+
+        // 修改generateOrderExcel函数，添加购物车商品详情
+        // 修改generateOrderExcel函数，正确处理商品价格
+        function generateOrderExcel(name, phone, address) {
+            const wb = XLSX.utils.book_new();
+            const cartItems = getCartItems();
+            
+            // 创建订单数据
+            const orderData = [
                 ["订单信息", ""],
                 ["姓名", name],
                 ["电话", phone],
                 ["收货地址", address],
                 ["订单日期", new Date().toLocaleString()],
-                ["订单金额", "¥" + calculateTotal()] // 需要添加计算总价的函数
+                ["订单金额", "¥" + calculateTotal()],
+                ["", ""],
+                ["商品列表", ""]
             ];
             
-            // 创建工作表
-            const ws = XLSX.utils.aoa_to_sheet(data);
+            // 添加商品详情
+            cartItems.forEach(item => {
+                orderData.push([
+                    item.name, 
+                    "¥" + (typeof item.price === 'number' ? item.price.toFixed(2) : item.price)
+                ]);
+            });
             
-            // 将工作表添加到工作簿
+            const ws = XLSX.utils.aoa_to_sheet(orderData);
             XLSX.utils.book_append_sheet(wb, ws, "订单详情");
             
-            // 生成Excel文件并下载
+            // 生成并下载Excel
             XLSX.writeFile(wb, `订单_${new Date().getTime()}.xlsx`);
+            
+            // 清空购物车
+            localStorage.removeItem('cart');
+            alert('订单已生成，感谢您的购买！');
+            window.location.href = 'index.html';
         }
-    
-        function getCartItems() {
-            return JSON.parse(localStorage.getItem('cart') || '[]');
-        }
-    
+
+        // 修正calculateTotal函数
         function calculateTotal() {
             const cartItems = getCartItems();
             let total = 0;
             cartItems.forEach(item => {
-                total += parseFloat(item.price.replace('¥', ''));
+                total += typeof item.price === 'number' ? item.price : parseFloat(item.price.replace('¥', ''));
             });
             return total.toFixed(2);
+        }
+    
+        // 修改getCartItems函数确保正确获取购物车数据
+        function getCartItems() {
+            try {
+                const cart = localStorage.getItem('cart');
+                if (!cart) return [];
+                
+                const items = JSON.parse(cart);
+                // 确保返回的数组格式正确
+                return Array.isArray(items) ? items : [];
+            } catch (e) {
+                console.error('获取购物车数据出错:', e);
+                return [];
+            }
+        }
+
+        // 修改generateOrderExcel函数，添加错误处理
+        function generateOrderExcel(name, phone, address) {
+            try {
+                const wb = XLSX.utils.book_new();
+                const cartItems = getCartItems();
+                
+                if (cartItems.length === 0) {
+                    alert('购物车为空，无法生成订单');
+                    return;
+                }
+
+                // 创建订单数据
+                const orderData = [
+                    ["订单信息", ""],
+                    ["姓名", name],
+                    ["电话", phone],
+                    ["收货地址", address],
+                    ["订单日期", new Date().toLocaleString()],
+                    ["订单金额", "¥" + calculateTotal()],
+                    ["", ""],
+                    ["商品列表", ""]
+                ];
+                
+                // 添加商品详情
+                cartItems.forEach(item => {
+                    orderData.push([
+                        item.name, 
+                        "¥" + (typeof item.price === 'number' ? item.price.toFixed(2) : item.price)
+                    ]);
+                });
+                
+                // 添加调试信息
+                console.log('准备生成的订单数据:', orderData);
+                
+                const ws = XLSX.utils.aoa_to_sheet(orderData);
+                XLSX.utils.book_append_sheet(wb, ws, "订单详情");
+                
+                // 生成并下载Excel
+                XLSX.writeFile(wb, `订单_${new Date().getTime()}.xlsx`);
+                
+                // 清空购物车
+                localStorage.removeItem('cart');
+                alert('订单已生成，感谢您的购买！');
+                window.location.href = 'index.html';
+            } catch (e) {
+                console.error('生成Excel出错:', e);
+                alert('生成订单失败，请重试或联系客服');
+            }
         }
     </script>
 </body>
