@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>购物车</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #444;
+            padding: 0.5rem;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+        }
+        nav a:hover {
+            background-color: #555;
+        }
+        .cart-items {
+            padding: 2rem;
+            margin-bottom: 150px;  /* 新增，为底部留出足够空间 */
+        }
+        .cart-item {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            padding: 1rem 0;
+            align-items: center;
+        }
+        .cart-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            margin-right: 1rem;
+        }
+        .item-info {
+            flex: 1;
+        }
+        .item-price {
+            color: #e53935;
+            font-weight: bold;
+        }
+        .checkout-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            cursor: pointer;
+            border-radius: 3px;
+            font-size: 1rem;
+            margin-top: 1rem;
+            position: fixed;
+            right: 20px;
+            bottom: 120px;    /* 从80px改为120px，下移按钮 */
+            z-index: 1000;
+        }
+        .checkout-btn:hover {
+            background-color: #45a049;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>购物车</h1>
+    </header>
+    <nav>
+        <a href="index.html">首页</a>
+        <a href="products.html">商品列表</a>
+        <a href="video.html">视频</a>
+    </nav>
+    <div class="cart-items">
+        <!-- 购物车商品将通过JavaScript动态添加 -->
+    </div>
+    <button class="checkout-btn">去结算</button>
+    <footer>
+        <p>© 2023 我们的商店. 版权所有.</p>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cartItems = JSON.parse(localStorage.getItem('cart') || '[]');
+            const cartContainer = document.querySelector('.cart-items');
+            
+            cartItems.forEach(item => {
+                const itemElement = document.createElement('div');
+                itemElement.className = 'cart-item';
+                itemElement.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="item-info">
+                        <h3>${item.name}</h3>
+                        <div class="item-price">¥${item.price.toFixed(2)}</div>
+                    </div>
+                `;
+                cartContainer.appendChild(itemElement);
+            });
+            
+            document.querySelector('.checkout-btn').addEventListener('click', function() {
+                window.location.href = 'payment.html';
+            });
+        });
+    </script>
+</body>
+</html>

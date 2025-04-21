@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页 - 团队照片</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>焕影清音</h1>
+    </header>
+    <nav>
+        <a href="index.html">首页</a>
+        <a href="products.html">商品列表</a>
+        <a href="video.html">视频</a>
+    </nav>
+    <footer>
+        <p>© 2023 我们的商店. 版权所有.</p>
+    </footer>
+    <!-- 删除原有团队照片代码 -->
+        <div class="slider-container">
+            <div class="slider">
+                <div class="slide active">
+                    <img src="微信图片_20241020014409.png" alt="轮播图1">
+                </div>
+                <div class="slide">
+                    <img src="微信图片_20241020014426.png" alt="轮播图2">
+                </div>
+                <div class="slide">
+                    <img src="微信图片_20241020014425.png" alt="轮播图3">
+                </div>
+            </div>
+            <div class="slider-controls">
+                <button class="prev">❮</button>
+                <button class="next">❯</button>
+            </div>
+        </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slider = document.querySelector('.slider');
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.querySelector('.prev');
+            const nextBtn = document.querySelector('.next');
+            let currentIndex = 0;
+            const totalSlides = slides.length;
+
+            function updateSlider() {
+                slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+            }
+
+            prevBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex > 0) ? currentIndex - 1 : totalSlides - 1;
+                updateSlider();
+            });
+
+            nextBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex < totalSlides - 1) ? currentIndex + 1 : 0;
+                updateSlider();
+            });
+
+            // 自动轮播
+            setInterval(() => {
+                currentIndex = (currentIndex < totalSlides - 1) ? currentIndex + 1 : 0;
+                updateSlider();
+            }, 5000);
+        });
+    </script>
+</body>
+</html>

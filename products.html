@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>焕影清音</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #444;
+            padding: 0.5rem;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+        }
+        nav a:hover {
+            background-color: #555;
+        }
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            padding: 2rem;
+        }
+        .product {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .product img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .product h3 {
+            margin: 0.5rem 0;
+        }
+        .product p {
+            color: #666;
+        }
+        .product button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        .product button:hover {
+            background-color: #45a049;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .cart-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            z-index: 1000;
+            background-color: #4CAF50;
+            border-radius: 50%;
+            padding: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .cart-icon img {
+            width: 100%;
+            height: 100%;
+        }
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>焕影清音</h1>
+    </header>
+    <nav>
+        <a href="index.html">首页</a>
+        <a href="products.html">商品列表</a>
+        <a href="video.html">视频</a>
+    </nav>
+    <div class="products">
+        <div class="product">
+            <img src="http://nichilemeng.cn/wp-content/uploads/2025/03/即-1.jpg" alt="商品1">
+            <h3>商品1</h3>
+            <p>¥99.00</p>
+            <button onclick="location.href='product1.html'">查看详情</button>
+        </div>
+        <div class="product">
+            <img src="http://nichilemeng.cn/wp-content/uploads/2025/03/即-1.jpg" alt="商品2">
+            <h3>商品2</h3>
+            <p>¥129.00</p>
+            <button onclick="location.href='product2.html'">查看详情</button>
+        </div>
+        <div class="product">
+            <img src="https://via.placeholder.com/300" alt="商品3">
+            <h3>商品3</h3>
+            <p>¥79.00</p>
+            <button onclick="location.href='product3.html'">查看详情</button>
+        </div>
+        <div class="product">
+            <img src="https://via.placeholder.com/300" alt="商品4">
+            <h3>商品4</h3>
+            <p>¥149.00</p>
+            <button onclick="location.href='product4.html'">查看详情</button>
+        </div>
+        <div class="product">
+            <img src="https://via.placeholder.com/300" alt="商品5">
+            <h3>商品5</h3>
+            <p>¥89.00</p>
+            <button onclick="location.href='product5.html'">查看详情</button>
+        </div>
+        <div class="product">
+            <img src="https://via.placeholder.com/300" alt="商品6">
+            <h3>商品6</h3>
+            <p>¥199.00</p>
+            <button onclick="location.href='product6.html'">查看详情</button>
+        </div>
+        <div class="product">
+            <img src="https://via.placeholder.com/300" alt="商品7">
+            <h3>商品7</h3>
+            <p>¥59.00</p>
+            <button onclick="location.href='product7.html'">查看详情</button>
+        </div>
+        <div class="product">
+            <img src="https://via.placeholder.com/300" alt="商品8">
+            <h3>商品8</h3>
+            <p>¥169.00</p>
+            <button onclick="location.href='product8.html'">查看详情</button>
+        </div>
+        <div class="product">
+            <img src="https://via.placeholder.com/300" alt="商品9">
+            <h3>商品9</h3>
+            <p>¥109.00</p>
+            <button onclick="location.href='product9.html'">查看详情</button>
+        </div>
+        <div class="product">
+            <img src="https://via.placeholder.com/300" alt="商品10">
+            <h3>商品10</h3>
+            <p>¥139.00</p>
+            <button onclick="location.href='product10.html'">查看详情</button>
+        </div>
+    </div>
+    <footer>
+        <p>© 2023 我们的商店. 版权所有.</p>
+    </footer>
+    <div class="cart-icon" onclick="location.href='cart.html'">
+        <img src="购物车.svg">
+        <div class="cart-badge" id="cart-count">0</div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cartItems = JSON.parse(localStorage.getItem('cart') || '[]');
+            document.getElementById('cart-count').textContent = cartItems.length;
+        });
+    </script>
+</body>
+</html>

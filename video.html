@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频展示</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #444;
+            padding: 0.5rem;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+        }
+        nav a:hover {
+            background-color: #555;
+        }
+        .video-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 180px); /* 调整为动态计算高度 */
+            padding: 0;
+            margin-bottom: 60px; /* 为页脚留出空间 */
+        }
+        video {
+            width: 90%;    /* 从max-width改为固定百分比 */
+            height: 90%;    /* 新增高度设置 */
+            object-fit: contain; /* 保持视频比例 */
+            background-color: #000; /* 添加黑色背景 */
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>焕影清音</h1>
+    </header>
+    <nav>
+        <a href="index.html">首页</a>
+        <a href="products.html">商品列表</a>
+        <a href="video.html">视频</a>
+    </nav>
+    <div class="video-container">
+        <video controls>
+            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+            您的浏览器不支持视频标签。
+        </video>
+    </div>
+    <footer>
+        <p>© 2023 我们的商店. 版权所有.</p>
+    </footer>
+</body>
+</html>
